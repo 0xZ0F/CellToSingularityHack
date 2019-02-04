@@ -6,8 +6,8 @@ namespace CellToSingularityHack
 {
     internal class Manager : MonoBehaviour
     {
-        private int menuX = 10;
-        private int menuY = 100;
+        private static int menuX = (Screen.width / 2) - 150;
+        private static int menuY = 125;
         private int toolbar = 0;
         private string[] toolbarLabels = { "Currency", "OTHER" };
 
@@ -20,30 +20,32 @@ namespace CellToSingularityHack
 
         private void Start()
         {
+            menuX = (Screen.width / 2) - 150;
         }
 
         private void OnGUI()
         {
-            GUI.Box(new Rect(menuX, 70, 300, 30), "");
-            toolbar = GUI.Toolbar(new Rect(menuX, 70, 300, 30), toolbar, toolbarLabels);
+            menuX = (Screen.width / 2) - 150;
+            GUI.Box(new Rect(menuX, menuY - 30, 300, 30), "");
+            toolbar = GUI.Toolbar(new Rect(menuX, menuY - 30, 300, 30), toolbar, toolbarLabels);
 
             if (toolbar == 0)// CURRENCY
             {
                 GUI.Box(new Rect(menuX, menuY, 300, 300), "Currency", GUI.skin.window);
 
-                GUI.Label(new Rect(menuX + 25, menuY + 20, 150, 20), "Entropy:");
-                entropyAmount = GUI.TextField(new Rect(menuX + 112.5f, menuY + 20, 75, 25), entropyAmount); // User specified entropy
+                GUI.Label(new Rect(menuX + 25, menuY + 25, 150, 20), "Entropy:");
+                entropyAmount = GUI.TextField(new Rect(menuX + 112.5f, menuY + 25, 75, 25), entropyAmount); // User specified entropy
 
-                GUI.Label(new Rect(menuX + 25, menuY + 45, 150, 20), "B:");
-                ideaAmount = GUI.TextField(new Rect(menuX + 112.5f, menuY + 45, 75, 25), ideaAmount); // User specified idea
+                GUI.Label(new Rect(menuX + 25, menuY + 50, 150, 20), "Idea:");
+                ideaAmount = GUI.TextField(new Rect(menuX + 112.5f, menuY + 50, 75, 25), ideaAmount); // User specified idea
 
-                GUI.Label(new Rect(menuX + 25, menuY + 70, 150, 20), "Darwinium:");
-                darwiniumAmount = GUI.TextField(new Rect(menuX + 112.5f, menuY + 70, 75, 25), darwiniumAmount); // User specified darwinium
+                GUI.Label(new Rect(menuX + 25, menuY + 75, 150, 20), "Darwinium:");
+                darwiniumAmount = GUI.TextField(new Rect(menuX + 112.5f, menuY + 75, 75, 25), darwiniumAmount); // User specified darwinium
 
-                GUI.Label(new Rect(menuX + 25, menuY + 95, 150, 20), "D:");
-                dAmount = GUI.TextField(new Rect(menuX + 112.5f, menuY + 95, 75, 25), dAmount); // User specified d
+                GUI.Label(new Rect(menuX + 25, menuY + 100, 150, 20), "D:");
+                dAmount = GUI.TextField(new Rect(menuX + 112.5f, menuY + 100, 75, 25), dAmount); // User specified d
 
-                if (GUI.Button(new Rect(menuX = 25, menuY + 125, 250, 30), new GUIContent("Add/Sub Amount", "Add or subtract specified amount to/from respective currency.")))
+                if (GUI.Button(new Rect(menuX + 25, menuY + 140, 250, 30), new GUIContent("Add/Sub Amount", "Add or subtract specified amount to/from respective currency.")))
                 {
                     try
                     {
@@ -57,7 +59,7 @@ namespace CellToSingularityHack
                     }
                     catch { }
                 }
-                else if (GUI.Button(new Rect(menuX = 25, menuY + 160, 250, 30), new GUIContent("Set Amount", "Set respective currency to specified amount.")))
+                else if (GUI.Button(new Rect(menuX + 25, menuY + 175, 250, 30), new GUIContent("Set To Amount", "Set respective currency to specified amount.")))
                 {
                     try
                     {
@@ -73,7 +75,7 @@ namespace CellToSingularityHack
             }
 
             // Tooltip:
-            GUI.Label(new Rect(10, 400, 300, 100), GUI.tooltip);
+            GUI.Label(new Rect(menuX, menuY + 300, 300, 100), GUI.tooltip);
         }
 
         private void Update()
